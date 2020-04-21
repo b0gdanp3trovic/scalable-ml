@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify
 import pickle
 import numpy as np
-from waitress import serve
 
 app = Flask(__name__)
 
@@ -17,4 +16,5 @@ def predict():
     response_data['message'] = 'Success!'
     return jsonify(response_data)
 
-serve(app, host='0.0.0.0', port=5000)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0')
