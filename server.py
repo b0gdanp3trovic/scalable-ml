@@ -6,6 +6,10 @@ app = Flask(__name__)
 
 model = pickle.load(open('model.pkl','rb'))
 
+@app.route('/', methods=['GET'])
+def default():
+    return 'OK'
+
 @app.route('/', methods=['POST'])
 def predict():
     data = request.get_json(force=True)
