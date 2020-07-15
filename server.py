@@ -1,10 +1,20 @@
 from flask import Flask, request, jsonify
-import pickle
 import numpy as np
+import joblib
+import os
 
 app = Flask(__name__)
 
-model = pickle.load(open('model.pkl','rb'))
+if(os.path.exists('./model/model.joblib')):
+    with open('./model/model.joblib','rb') as f:
+        try:
+            print('uhuh')
+            model = joblib.load(f)
+        except:
+            print('Error loading model file.')
+else:
+    print('Could not locate the model file!')
+
 
 @app.route('/', methods=['GET'])
 def default():
