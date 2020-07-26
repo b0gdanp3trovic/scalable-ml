@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: ml-server-deployment
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            component: ml-service
+    template:
+        metadata:
+            labels:
+                component: ml-service
+        spec:
+            containers:
+            - image: bogdanp3trovic/ml-server:1.2
+              name: ml-server
+              ports:
+                - containerPort: 8000
+              volumeMounts:
+                - name: model-storage
+                  mountPath: /app/model
+            volumes:
+              - name: model-storage
+                persistentVolumeClaim:
+                    claimName: ml-server-pv-claim
+
+    

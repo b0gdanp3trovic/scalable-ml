@@ -8,12 +8,12 @@ app = Flask(__name__)
 if(os.path.exists('./model/model.joblib')):
     with open('./model/model.joblib','rb') as f:
         try:
-            print('uhuh')
             model = joblib.load(f)
         except:
             print('Error loading model file.')
 else:
     print('Could not locate the model file!')
+
 
 
 @app.route('/', methods=['GET'])

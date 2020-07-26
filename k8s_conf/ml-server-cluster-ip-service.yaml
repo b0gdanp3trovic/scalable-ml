@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: ml-server-cluster-ip-service
+spec:
+    type: ClusterIP
+    selector:
+        component: ml-service
+    ports:
+      - port: 8000
+        targetPort: 8000 

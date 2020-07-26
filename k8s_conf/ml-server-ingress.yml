@@ -1,0 +1,13 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+    name: ml-server-ingress
+spec:
+    rules:
+    - http:
+        paths:
+        - path: /*
+          backend:
+            serviceName: ml-server-nodeport-service
+            servicePort: 8000
+

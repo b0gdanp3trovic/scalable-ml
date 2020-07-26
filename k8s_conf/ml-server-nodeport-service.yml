@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: ml-server-nodeport-service
+spec:
+    type: NodePort
+    selector:
+        component: ml-service
+    ports:
+      - port: 8000
+        targetPort: 8000
