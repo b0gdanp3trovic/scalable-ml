@@ -11,5 +11,6 @@ spec:
         namespace: default
         name: ml-service-pv-claim
     gcePersistentDisk:
-        pdName: pvc-c99b12f4-cf57-11ea-ac3c-42010a9a011d
+        pdName: gke-ml-cluster-312cda4-pvc-c99b12f4-cf57-11ea-ac3c-42010a9a011d
         fsType: ext4
+        readOnly: true

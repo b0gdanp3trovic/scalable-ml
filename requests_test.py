@@ -12,9 +12,10 @@ def http_test():
     latencies.append(result.elapsed.total_seconds())
 
 threads = []
-for i in range(10000):
+for i in range(1000):
     t = threading.Thread(target=http_test)
     threads.append(t)
+    time.sleep(0.5)
     t.start()
 
 

@@ -26,6 +26,8 @@ def predict():
     array = np.array([[data['LSTAT'], data['RM']]])
     prediction = model.predict(array)
     response_data ={}
+    for i in range(0, 10000):
+        print(i)
     response_data['response'] = prediction.tolist()
     response_data['message'] = 'Success!'
     return jsonify(response_data)

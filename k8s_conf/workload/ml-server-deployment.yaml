@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
     name: ml-server-deployment
 spec:
-    replicas: 1
+    replicas: 3
     selector:
         matchLabels:
             component: ml-service
@@ -13,16 +13,21 @@ spec:
                 component: ml-service
         spec:
             containers:
-            - image: bogdanp3trovic/ml-server:1.2
+            - image: bogdanp3trovic/ml-server:1.4
               name: ml-server
               ports:
                 - containerPort: 8000
+              resources:
+                  requests:
+                      cpu: "50m"
               volumeMounts:
                 - name: model-storage
                   mountPath: /app/model
+                  readOnly: true
             volumes:
               - name: model-storage
                 persistentVolumeClaim:
                     claimName: ml-server-pv-claim
+                    readOnly: true
 
     
