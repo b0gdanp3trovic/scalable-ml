@@ -10,8 +10,9 @@ app = Flask(__name__)
 def configure_boto3():
     access_key = os.environ.get('AWS_ACCESS_KEY_ID')
     secret_key = os.environ.get('AWS_SECRET_ACCESS_KEY')
-    s3 = boto3.resource('s3', aws_access_key_id=access_key, aws_secret_access_key=secret_key)
-    s3.Bucket('mlbucketbp').download_file('model.joblib', 'model.joblib')
+    s3 = boto3.client('s3', aws_access_key_id=access_key, aws_secret_access_key=secret_key)
+    response = s3.get_object(Bucket='mlbucketbp', Key='model.joblib')
+    print(response['Body'].read())
 
 if(os.path.exists('./model/model.joblib')):
     with open('./model/model.joblib','rb') as f:
