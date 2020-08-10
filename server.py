@@ -17,8 +17,8 @@ elif('S3_BUCKET_NAME' in os.environ):
     try:
         url = 'http://s3.amazonaws.com/mlbucketbp/model.joblib'
         model = joblib.load(requests.get(url))
-    except:
-        print('Error loading model file from AWS S3.')
+    except requests.exceptions.HTTPError as err:
+        print(err)
     
 
 
