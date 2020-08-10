@@ -2,9 +2,17 @@ from flask import Flask, request, jsonify
 import requests
 import numpy as np
 import joblib
+import boto3
 import os
 
 app = Flask(__name__)
+
+def configure_boto3():
+    access_key = os.environ('AWS_ACCESS_KEY_ID')
+    secret_key = os.environ('AWS_SECRET_ACCESS_KEY')
+    s3_ob = boto3.resource('s3', aws_access_key_id=access_key, aws_secret_access_key=secret_key)
+    for each_b in s3_ob.buckets.all():
+        print(each_b.name)
 
 if(os.path.exists('./model/model.joblib')):
     with open('./model/model.joblib','rb') as f:
@@ -14,13 +22,11 @@ if(os.path.exists('./model/model.joblib')):
             print('Error loading model file.')
 elif('S3_BUCKET_NAME' in os.environ):
     print('Heroku environment detected.')
-    try:
-        url = 'https://mlbucketbp.s3.eu-central-1.amazonaws.com/model.joblib'
-        model = joblib.load(requests.get(url).text)
-    except requests.exceptions.HTTPError as err:
-        print(err)
-    
+    configure_boto3()
 
+
+
+    
 
 
 
