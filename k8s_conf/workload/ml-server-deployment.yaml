@@ -27,7 +27,7 @@ spec:
             volumes:
               - name: model-storage
                 persistentVolumeClaim:
-                    claimName: ml-server-pv-claim
+                    claimName: ml-service-pv-claim
                     readOnly: true
 
     

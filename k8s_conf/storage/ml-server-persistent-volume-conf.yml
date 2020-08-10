@@ -1,16 +1,29 @@
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-    name: ml-service-volume
+apiVersion: v1 
+kind: PersistentVolumeClaim
+metadata: 
+    name: ml-service-pv-claim
 spec:
-    capacity:
-        storage: 3G
     accessModes:
         - ReadOnlyMany
-    claimRef:
-        namespace: default
-        name: ml-service-pv-claim
-    gcePersistentDisk:
-        pdName: gke-ml-cluster-312cda4-pvc-c99b12f4-cf57-11ea-ac3c-42010a9a011d
-        fsType: ext4
-        readOnly: true
+    resources:
+        requests:
+            storage: 3G  
+
+
+
+#apiVersion: v1
+#kind: PersistentVolume
+#metadata:
+#    name: ml-service-volume
+#spec:
+#    capacity:
+#        storage: 3G
+#    accessModes:
+#        - ReadOnlyMany
+#    claimRef:
+#        namespace: default
+#        name: ml-service-pv-claim
+#    gcePersistentDisk:
+#        pdName: gke-ml-cluster-312cda4-pvc-c99b12f4-cf57-11ea-ac3c-42010a9a011d
+#        fsType: ext4
+#        readOnly: true
