@@ -13,6 +13,7 @@ def configure_boto3():
     s3 = boto3.client('s3', aws_access_key_id=access_key, aws_secret_access_key=secret_key)
     response = s3.get_object(Bucket='mlbucketbp', Key='model.joblib')
     print(response['Body'].read())
+    return response['Body'].read()
 
 if(os.path.exists('./model/model.joblib')):
     with open('./model/model.joblib','rb') as f:
@@ -23,8 +24,7 @@ if(os.path.exists('./model/model.joblib')):
 elif('S3_BUCKET_NAME' in os.environ):
     print('Heroku environment detected.')
     try:
-        configure_boto3()
-        model = joblib.load('model.joblib')
+        model = configure_boto3()
     except:
         print('There was an error obtaining the file from S3.')
 
