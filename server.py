@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+import requests
 import numpy as np
 import joblib
 import os
@@ -11,8 +12,15 @@ if(os.path.exists('./model/model.joblib')):
             model = joblib.load(f)
         except:
             print('Error loading model file.')
-else:
-    print('Could not locate the model file!')
+elif('S3_BUCKET_NAME' in os.environ):
+    print('Heroku environment detected.')
+    try:
+        url = 'http://s3.amazonaws.com/mlbucketbp/model.joblib'
+        model = requests.get(url)
+    except:
+        print('Error loading model file from AWS S3.')
+    
+
 
 
 
