@@ -8,8 +8,8 @@ import os
 app = Flask(__name__)
 
 def configure_boto3():
-    access_key = os.environ('AWS_ACCESS_KEY_ID')
-    secret_key = os.environ('AWS_SECRET_ACCESS_KEY')
+    access_key = os.environ.get('AWS_ACCESS_KEY_ID')
+    secret_key = os.environ.get('AWS_SECRET_ACCESS_KEY')
     s3_ob = boto3.resource('s3', aws_access_key_id=access_key, aws_secret_access_key=secret_key)
     for each_b in s3_ob.buckets.all():
         print(each_b.name)
