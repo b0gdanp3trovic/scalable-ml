@@ -16,7 +16,7 @@ elif('S3_BUCKET_NAME' in os.environ):
     print('Heroku environment detected.')
     try:
         url = 'http://s3.amazonaws.com/mlbucketbp/model.joblib'
-        model = joblib.load(requests.get(url))
+        model = joblib.load(requests.get(url).read())
     except requests.exceptions.HTTPError as err:
         print(err)
     
