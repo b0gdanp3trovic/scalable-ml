@@ -23,10 +23,7 @@ if(os.path.exists('./model/model.joblib')):
             print('Error loading model file.')
 elif('S3_BUCKET_NAME' in os.environ):
     print('Heroku environment detected.')
-    try:
-        model = joblib.load(configure_boto3())
-    except:
-        print('There was an error obtaining the file from S3.')
+    model = joblib.load(configure_boto3())
 
 
 @app.route('/', methods=['GET'])
