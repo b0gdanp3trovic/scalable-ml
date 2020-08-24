@@ -10,4 +10,5 @@ pip3 install -r requirements.txt
 
 EXPOSE 8000
 
-CMD ["gunicorn","-b", "0.0.0.0:8000", "server:app"]
+RUN sleep 20
+CMD ["gunicorn","--workers=3", "--backlog=1024", "-b",  "0.0.0.0:8000", "server:app"]

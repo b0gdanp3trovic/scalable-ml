@@ -4,6 +4,7 @@ import numpy as np
 import joblib
 import boto3
 import os
+import time
 
 app = Flask(__name__)
 
@@ -35,16 +36,22 @@ def default():
     return 'OK'
 
 @app.route('/', methods=['POST'])
-def predict():
+def simulate_prediction():
+    prediction = {}
+    for _ in range(400):
+        prediction = predict(request)
+    return prediction
+
+def predict(request):
     data = request.get_json(force=True)
     array = np.array([[data['LSTAT'], data['RM']]])
     prediction = model.predict(array)
     response_data ={}
-    for i in range(0, 10000):
-        print(i)
     response_data['response'] = prediction.tolist()
     response_data['message'] = 'Success!'
     return jsonify(response_data)
 
 if __name__ == '__main__':
+    time.sleep(20)
     app.run(host='0.0.0.0')
+    print('Started!')
