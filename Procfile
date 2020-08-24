@@ -1,1 +1,1 @@
-web: gunicorn --backlog=1024 server:app
+web: gunicorn --backlog=1024 --threads=2 server:app
