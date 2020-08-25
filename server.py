@@ -38,6 +38,7 @@ def default():
 @app.route('/', methods=['POST'])
 def simulate_prediction():
     prediction = {}
+    
     for _ in range(400):
         prediction = predict(request)
     return prediction
