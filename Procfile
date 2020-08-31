@@ -1,1 +1,1 @@
-web: gunicorn --backlog=1024 server:app
+web: gunicorn --backlog=256 server:app
