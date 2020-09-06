@@ -7,7 +7,6 @@ import os
 import time
 
 app = Flask(__name__)
-
 def get_model_from_s3():
     access_key = os.environ.get('AWS_ACCESS_KEY_ID')
     secret_key = os.environ.get('AWS_SECRET_ACCESS_KEY')
@@ -53,6 +52,5 @@ def predict(request):
     return jsonify(response_data)
 
 if __name__ == '__main__':
-    time.sleep(20)
     app.run(host='0.0.0.0')
     print('Started!')
